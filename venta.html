@@ -3,11 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <title>Insignia Tecnologica Templates</title>
+    
     <style>
       body,
       html {
@@ -24,7 +26,7 @@
       }
 
       nav {
-          background-color: #00000070;
+          background-color: #1f2937;
           color: rgb(255, 255, 255);
           padding: 1rem 0;
           /* Padding ajustado */
@@ -307,11 +309,20 @@
           color: #333;
       }
 
+      .modal-custom-width {
+    max-width: 80%; /* Modal ocupará hasta el 80% del ancho de la pantalla */
+  }
 
+  .modal-body {
+    display: flex;
+    align-items: center;
+  }
 
-
-
-      */
+  .modal-content img {
+    width: 100%; /* La imagen ocupará el 100% de su columna */
+    height: 70vh; /* Mantiene la proporción original de la imagen */
+    object-fit: cover; /* Cubre el área sin distorsionar */
+  }
     </style>
   </head>
 
@@ -319,7 +330,9 @@
     <nav>
       <div class="container">
         <div class="logo">
-          <img src="img/insignia.jpeg" alt="Company Logo" />
+          <a href="index.html"> <!-- Enlace que lleva a index.html -->
+            <img src="img/insignia.jpeg" alt="Company Logo" />
+          </a>
           <div class="logo-text">Insignia Tecnológica</div>
         </div>
         <div class="menu-toggle" id="menuToggle">
@@ -334,6 +347,7 @@
         </ul>
       </div>
     </nav>
+
     <script>
       const menuToggle = document.getElementById("menuToggle");
       const navMenu = document.getElementById("navMenu");
@@ -347,13 +361,12 @@
       <div class="container">
         <h2>Propiedades en Venta</h2>
         <div class="property-grid">
-          <div class="property-card">
+          <div class="property-card" data-bs-toggle="modal" data-bs-target="#propertyModal">
             <img src="img/casa1.jpeg" alt="Modern Apartment" />
             <div class="property-card-content">
               <h3>Modern Apartment</h3>
               <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Beatae, sed.
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae, sed.
               </p>
               <div class="property-details">
                 <span><i class="fas fa-bed"></i> 3</span>
@@ -459,6 +472,79 @@
       </div>
     </section>
 
+<!-- Modal -->
+<div class="modal fade" id="propertyModal" tabindex="-1" aria-labelledby="propertyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-custom-width">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="propertyModalLabel">Detalles de la Propiedad</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <!-- Columna del carrusel, ocupa el 60% del ancho -->
+          <div class="col-7">
+            <div id="propertyCarousel" class="carousel slide" data-bs-ride="carousel">
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img src="img/casa1.jpeg" alt="Modern Apartment" class="d-block w-100" />
+                </div>
+                <div class="carousel-item">
+                  <img src="img/casa2.jpeg" alt="Modern Apartment Interior" class="d-block w-100" />
+                </div>
+                <div class="carousel-item">
+                  <img src="img/sala-perfecta-1170x780.jpg" alt="Modern Apartment View" class="d-block w-100" />
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#propertyCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+          </div>
+          <!-- Columna de la información, ocupa el 40% del ancho -->
+          <div class="col-5">
+            <h3>Modern Apartment</h3>
+            <p>
+              Disfruta de la comodidad de este moderno apartamento, ubicado en una de las zonas más exclusivas de la ciudad. 
+              Con un diseño elegante y acabados de alta calidad, esta propiedad cuenta con amplias áreas que incluyen tres 
+              dormitorios luminosos y dos baños completamente equipados. El salón principal se conecta con una cocina abierta, 
+              perfecta para recibir invitados o disfrutar de una cena en familia.
+            </p>
+            <p>
+              Además, cuenta con un balcón privado que ofrece impresionantes vistas de la ciudad, proporcionando un espacio ideal 
+              para relajarse y disfrutar del aire libre. Este apartamento también incluye estacionamiento privado y acceso a las 
+              mejores comodidades, como gimnasio y piscina.
+            </p>
+            <div class="property-details row">
+              <div class="col-6 text-start"> <!-- Alineación a la izquierda -->
+                <span><i class="fas fa-bed"></i> 3 dormitorios</span><br />
+                <span><i class="fas fa-bath"></i> 2 baños</span><br />
+              </div>
+              <div class="col-6 text-start"> <!-- Alineación a la izquierda -->
+                <span><i class="fas fa-ruler-combined"></i> 80 mt²</span><br />
+                <span><i class="fas fa-car"></i> Garaje</span>
+              </div>
+            </div>
+            <div class="text-start mt-3">
+              <span style="font-size: 1.5rem; font-weight: bold;"><i class="fas fa-dollar-sign"></i> $200,000</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a href="https://wa.me/1234567890" class="btn btn-success" target="_blank">Contactar al Asesor</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
     <footer>
       <div class="container">
         <div class="footer-content">
@@ -508,5 +594,7 @@
         </div>
       </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
   </body>
 </html>
