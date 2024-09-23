@@ -323,23 +323,48 @@
     }
 
     .modal-custom-width {
-      max-width: 80%;
-      /* Modal ocupará hasta el 80% del ancho de la pantalla */
-    }
+        max-width: 80%;
+        /* Modal ocupará hasta el 80% del ancho de la pantalla */
+      }
 
-    .modal-body {
-      display: flex;
-      align-items: center;
-    }
+      @media (max-width: 768px) {
+        .modal-custom-width {
+          max-width: 100%;
+        }
+        .modal-body {
+          max-width: 100%;
+          display: flex;
+          align-items: center;
+        }
 
-    .modal-content img {
-      width: 100%;
-      /* La imagen ocupará el 100% de su columna */
-      height: 70vh;
-      /* Mantiene la proporción original de la imagen */
-      object-fit: cover;
-      /* Cubre el área sin distorsionar */
-    }
+        .modal-content img {
+          /* La imagen ocupará el 100% de su columna */
+          height: 40vh;
+          /* Mantiene la proporción original de la imagen */
+          margin-bottom: 20px;
+          /* Cubre el área sin distorsionar */
+        }
+      }
+
+      @media (max-width: 768px) {
+        .carousel_div {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+        }
+
+        .content {
+          width: 100%;
+        }
+
+        .images {
+          width: 100%;
+        }
+      }
+
+      .modal_div {
+        width: 100%;
+      }
 
 
 
@@ -519,83 +544,136 @@
     </div>
   </section>
 
-  <!-- Modal -->
-  <div class="modal fade" id="propertyModal" tabindex="-1" aria-labelledby="propertyModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-custom-width">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="propertyModalLabel">Detalles de la Propiedad</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <!-- Columna del carrusel, ocupa el 60% del ancho -->
-            <div class="col-7">
-              <div id="propertyCarousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                  <div class="carousel-item active">
-                    <img src="img/casa1.jpeg" alt="Modern Apartment" class="d-block w-100" />
+      <!-- Modal -->
+      <div
+      class="modal fade modal_div"
+      id="propertyModal"
+      tabindex="-1"
+      aria-labelledby="propertyModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-custom-width">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="propertyModalLabel">
+              Detalles de la Propiedad
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="row carousel_div">
+              <!-- Columna del carrusel, ocupa el 60% del ancho -->
+              <div class="col-7 images">
+                <div
+                  id="propertyCarousel"
+                  class="carousel slide"
+                  data-bs-ride="carousel"
+                >
+                  <div class="carousel-inner" style="width: 100%">
+                    <div class="carousel-item active" style="width: 100%">
+                      <img
+                        src="img/casa1.jpeg"
+                        alt="Modern Apartment"
+                        class="d-block w-100"
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/casa2.jpeg"
+                        alt="Modern Apartment Interior"
+                        class="d-block w-100"
+                      />
+                    </div>
+                    <div class="carousel-item">
+                      <img
+                        src="img/sala-perfecta-1170x780.jpg"
+                        alt="Modern Apartment View"
+                        class="d-block w-100"
+                      />
+                    </div>
                   </div>
-                  <div class="carousel-item">
-                    <img src="img/casa2.jpeg" alt="Modern Apartment Interior" class="d-block w-100" />
-                  </div>
-                  <div class="carousel-item">
-                    <img src="img/sala-perfecta-1170x780.jpg" alt="Modern Apartment View" class="d-block w-100" />
-                  </div>
+                  <button
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#propertyCarousel"
+                    data-bs-slide="prev"
+                  >
+                    <span
+                      class="carousel-control-prev-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#propertyCarousel"
+                    data-bs-slide="next"
+                  >
+                    <span
+                      class="carousel-control-next-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel"
-                  data-bs-slide="prev">
-                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#propertyCarousel"
-                  data-bs-slide="next">
-                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                  <span class="visually-hidden">Next</span>
-                </button>
               </div>
-            </div>
-            <!-- Columna de la información, ocupa el 40% del ancho -->
-            <div class="col-5">
-              <h3>Modern Apartment</h3>
-              <p>
-                Disfruta de la comodidad de este moderno apartamento, ubicado en una de las zonas más exclusivas de la
-                ciudad.
-                Con un diseño elegante y acabados de alta calidad, esta propiedad cuenta con amplias áreas que incluyen
-                tres
-                dormitorios luminosos y dos baños completamente equipados. El salón principal se conecta con una cocina
-                abierta,
-                perfecta para recibir invitados o disfrutar de una cena en familia.
-              </p>
-              <p>
-                Además, cuenta con un balcón privado que ofrece impresionantes vistas de la ciudad, proporcionando un
-                espacio ideal
-                para relajarse y disfrutar del aire libre. Este apartamento también incluye estacionamiento privado y
-                acceso a las
-                mejores comodidades, como gimnasio y piscina.
-              </p>
-              <div class="property-details row">
-                <div class="col-6 text-start"> <!-- Alineación a la izquierda -->
-                  <span><i class="fas fa-bed"></i> 3 dormitorios</span><br />
-                  <span><i class="fas fa-bath"></i> 2 baños</span><br />
+              <!-- Columna de la información, ocupa el 40% del ancho -->
+              <div class="col-5 content">
+                <h3>Modern Apartment</h3>
+                <p>
+                  Disfruta de la comodidad de este moderno apartamento, ubicado
+                  en una de las zonas más exclusivas de la ciudad. Con un diseño
+                  elegante y acabados de alta calidad, esta propiedad cuenta con
+                  amplias áreas que incluyen tres dormitorios luminosos y dos
+                  baños completamente equipados. El salón principal se conecta
+                  con una cocina abierta, perfecta para recibir invitados o
+                  disfrutar de una cena en familia.
+                </p>
+                <p>
+                  Además, cuenta con un balcón privado que ofrece impresionantes
+                  vistas de la ciudad, proporcionando un espacio ideal para
+                  relajarse y disfrutar del aire libre. Este apartamento también
+                  incluye estacionamiento privado y acceso a las mejores
+                  comodidades, como gimnasio y piscina.
+                </p>
+                <div class="property-details row">
+                  <div class="col-6 text-start">
+                    <!-- Alineación a la izquierda -->
+                    <span><i class="fas fa-bed"></i> 3 dormitorios</span><br />
+                    <span><i class="fas fa-bath"></i> 2 baños</span><br />
+                  </div>
+                  <div class="col-6 text-start">
+                    <!-- Alineación a la izquierda -->
+                    <span><i class="fas fa-ruler-combined"></i> 80 mt²</span
+                    ><br />
+                    <span><i class="fas fa-car"></i> Garaje</span>
+                  </div>
                 </div>
-                <div class="col-6 text-start"> <!-- Alineación a la izquierda -->
-                  <span><i class="fas fa-ruler-combined"></i> 80 mt²</span><br />
-                  <span><i class="fas fa-car"></i> Garaje</span>
+                <div class="text-start mt-3">
+                  <span style="font-size: 1.5rem; font-weight: bold"
+                    ><i class="fas fa-dollar-sign"></i> $200,000</span
+                  >
                 </div>
-              </div>
-              <div class="text-start mt-3">
-                <span style="font-size: 1.5rem; font-weight: bold;"><i class="fas fa-dollar-sign"></i> $200,000</span>
               </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <a href="https://wa.me/1234567890" class="btn btn-success" target="_blank">Contactar al Asesor</a>
+          <div class="modal-footer">
+            <a
+              href="https://wa.me/1234567890"
+              class="btn btn-success"
+              target="_blank"
+              >Contactar al Asesor</a
+            >
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
 
   <section class="properties d-flex justify-content-center align-items-center bg-white"
