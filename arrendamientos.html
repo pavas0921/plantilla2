@@ -1,600 +1,631 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    
-    <style>
-      body,
-      html {
-          margin: 0;
-          padding: 0;
-          font-family: Arial, sans-serif;
-          line-height: 1.5;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-      .container {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 0 1rem;
-      }
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
-      nav {
-          background-color: #1f2937;
-          color: rgb(255, 255, 255);
-          padding: 1rem 0;
-          /* Padding ajustado */
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-          position: relative;
-          /* Para el menú hamburguesa */
-      }
+  <style>
+    body,
+    html {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      line-height: 1.5;
+    }
 
-      nav .container {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-      }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
 
-      .logo {
-          display: flex;
-          align-items: center;
-      }
+    nav {
+      background-color: #1f2937;
+      color: rgb(255, 255, 255);
+      padding: 1rem 0;
+      /* Padding ajustado */
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      position: relative;
+      /* Para el menú hamburguesa */
+    }
 
-      .logo img {
-          width: 80px;
-          height: 80px;
-          border-radius: 50%;
-          margin-right: 1rem;
-      }
+    nav .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-      .logo-text {
-          font-size: 1.5rem;
-          font-weight: bold;
-      }
+    .logo {
+      display: flex;
+      align-items: center;
+    }
 
+    .logo img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-right: 1rem;
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+    }
+
+    nav ul li {
+      margin-left: 1rem;
+    }
+
+    nav ul li a {
+      color: rgb(255, 255, 255);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover {
+      color: #e0e0e0;
+    }
+
+    .menu-toggle {
+      display: none;
+      /* Oculto por defecto */
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .menu-toggle div {
+      height: 3px;
+      width: 25px;
+      background: white;
+      margin: 3px 0;
+      transition: all 0.3s ease;
+    }
+
+    @media (max-width: 768px) {
       nav ul {
-          list-style-type: none;
-          padding: 0;
-          margin: 0;
-          display: flex;
+        display: none;
+        /* Oculto en móviles */
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        /* Ajusta según la altura del navbar */
+        left: 0;
+        background: rgba(0, 0, 0, 0.9);
+        width: 100%;
       }
 
-      nav ul li {
-          margin-left: 1rem;
-      }
-
-      nav ul li a {
-          color: rgb(255, 255, 255);
-          text-decoration: none;
-          font-weight: 600;
-          font-size: 1.1rem;
-          transition: color 0.3s ease;
-      }
-
-      nav ul li a:hover {
-          color: #e0e0e0;
+      nav ul.active {
+        display: flex;
+        /* Muestra el menú al activarse */
       }
 
       .menu-toggle {
-          display: none;
-          /* Oculto por defecto */
-          flex-direction: column;
-          cursor: pointer;
+        display: flex;
+        /* Muestra el menú hamburguesa en móviles */
       }
+    }
 
-      .menu-toggle div {
-          height: 3px;
-          width: 25px;
-          background: white;
-          margin: 3px 0;
-          transition: all 0.3s ease;
-      }
+    .banner {
+      position: relative;
+      height: 550px;
+      overflow: hidden;
+    }
+
+    .banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .banner-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .banner h1 {
+      color: white;
+      font-size: 3rem;
+      text-align: center;
 
       @media (max-width: 768px) {
-          nav ul {
-              display: none;
-              /* Oculto en móviles */
-              flex-direction: column;
-              position: absolute;
-              top: 60px;
-              /* Ajusta según la altura del navbar */
-              left: 0;
-              background: rgba(0, 0, 0, 0.9);
-              width: 100%;
-          }
-
-          nav ul.active {
-              display: flex;
-              /* Muestra el menú al activarse */
-          }
-
-          .menu-toggle {
-              display: flex;
-              /* Muestra el menú hamburguesa en móviles */
-          }
+        margin-bottom: 280px;
       }
+    }
 
-      .banner {
-          position: relative;
-          height: 550px;
-          overflow: hidden;
-      }
+    .search-form {
+      position: absolute;
+      width: 100%;
+      max-width: 1000px;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: rgba(255, 255, 255, 0.2);
+      padding: 2rem;
+      border-radius: 8px;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
 
-      .banner img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-      }
+    .search-form form {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      width: 100%;
+    }
 
-      .banner-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-color: rgba(0, 0, 0, 0.5);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-      }
+    .search-form label {
+      font-weight: bold;
+      color: white;
+    }
 
-      .banner h1 {
-          color: white;
-          font-size: 3rem;
-          text-align: center;
+    .search-form select,
+    .search-form input[type="number"] {
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background-color: rgba(255, 255, 255, 0.9);
+    }
 
-          @media (max-width: 768px) {
-              margin-bottom: 280px;
-          }
-      }
+    .search-form button {
+      padding: 0.5rem 1rem;
+      background-color: #439790;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
 
-      .search-form {
-          position: absolute;
-          width: 100%;
-          max-width: 1000px;
-          bottom: 10%;
-          left: 50%;
-          transform: translateX(-50%);
-          background-color: rgba(255, 255, 255, 0.2);
-          padding: 2rem;
-          border-radius: 8px;
-          display: flex;
-          gap: 1rem;
-          flex-wrap: wrap;
-      }
-
-      .search-form form {
-          display: flex;
-          gap: 1rem;
-          justify-content: center;
-          flex-wrap: wrap;
-          width: 100%;
-      }
-
-      .search-form label {
-          font-weight: bold;
-          color: white;
-      }
-
-      .search-form select,
-      .search-form input[type="number"] {
-          padding: 0.5rem;
-          border: 1px solid #ccc;
-          border-radius: 4px;
-          background-color: rgba(255, 255, 255, 0.9);
-      }
-
-      .search-form button {
-          padding: 0.5rem 1rem;
-          background-color: #439790;
-          color: white;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-          transition: background-color 0.3s ease;
-      }
-
-      .search-form button:hover {
-          background-color: #357b76;
-      }
+    .search-form button:hover {
+      background-color: #357b76;
+    }
 
 
-      .properties {
-          background-color: #f3f4f6;
-          padding: 3rem 0;
-      }
+    .properties {
+      background-color: #f3f4f6;
+      padding: 3rem 0;
+    }
 
-      .properties h2 {
-          font-size: 2rem;
-          margin-bottom: 2rem;
-      }
+    .properties h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
 
-      .property-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 2rem;
-      }
+    .property-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
 
-      .property-card {
-          background-color: white;
-          border-radius: 0.5rem;
-          overflow: hidden;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
+    .property-card {
+      background-color: white;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
-      .property-card img {
-          width: 100%;
-          height: 200px;
-          object-fit: cover;
-      }
+    .property-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
 
-      .property-card-content {
-          padding: 1rem;
-      }
+    .property-card-content {
+      padding: 1rem;
+    }
 
-      .property-card h3 {
-          margin: 0 0 0.5rem 0;
-      }
+    .property-card h3 {
+      margin: 0 0 0.5rem 0;
+    }
 
-      footer {
-          background-color: #1f2937;
-          color: white;
-          padding: 1rem 0;
-          height: auto;
-      }
+    footer {
+      background-color: #1f2937;
+      color: white;
+      padding: 1rem 0;
+      height: auto;
+    }
 
-      .footer-content {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-          gap: 1rem;
-      }
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
 
-      .footer-section h3 {
-          margin-bottom: 1rem;
-      }
+    .footer-section h3 {
+      margin-bottom: 1rem;
+    }
 
-      .footer-section ul {
-          list-style-type: none;
-          padding: 0;
-      }
+    .footer-section ul {
+      list-style-type: none;
+      padding: 0;
+    }
 
-      .footer-section ul li {
-          margin-bottom: 0.5rem;
-      }
+    .footer-section ul li {
+      margin-bottom: 0.5rem;
+    }
 
-      .social-icons a {
-          color: white;
-          text-decoration: none;
-          margin-right: 1rem;
-      }
+    .social-icons a {
+      color: white;
+      text-decoration: none;
+      margin-right: 1rem;
+    }
 
-      .newsletter-form {
-          display: flex;
-      }
+    .newsletter-form {
+      display: flex;
+    }
 
-      .newsletter-form input {
-          flex-grow: 1;
-          padding: 0.5rem;
-          border: none;
-          border-radius: 0.25rem 0 0 0.25rem;
-      }
+    .newsletter-form input {
+      flex-grow: 1;
+      padding: 0.5rem;
+      border: none;
+      border-radius: 0.25rem 0 0 0.25rem;
+    }
 
-      .newsletter-form button {
-          padding: 0.5rem 1rem;
-          background-color: #3b82f6;
-          color: white;
-          border: none;
-          border-radius: 0 0.25rem 0.25rem 0;
-          cursor: pointer;
-      }
+    .newsletter-form button {
+      padding: 0.5rem 1rem;
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 0 0.25rem 0.25rem 0;
+      cursor: pointer;
+    }
 
-      .copyright {
-          margin-top: 2rem;
-          text-align: center;
-          border-top: 1px solid #374151;
-          padding-top: 1rem;
-      }
+    .copyright {
+      margin-top: 2rem;
+      text-align: center;
+      border-top: 1px solid #374151;
+      padding-top: 1rem;
+    }
 
-      .property-details {
-          margin-top: 1rem;
-          display: flex;
-          justify-content: space-around;
-          font-size: 1rem;
-          color: #333;
-      }
+    .property-details {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: space-around;
+      font-size: 1rem;
+      color: #333;
+    }
 
+    .modal-custom-width {
+     
+      max-width: 80%;
+      /* Modal ocupará hasta el 80% del ancho de la pantalla */
+    }
+
+    @media (max-width: 768px) {
       .modal-custom-width {
-    max-width: 80%; /* Modal ocupará hasta el 80% del ancho de la pantalla */
+        width: 95%;
+      }
+      .modal-body {
+      display: flex;
+      align-items: center;
+    }
+
+
+    .modal-content img {
+      width: 100%;
+      /* La imagen ocupará el 100% de su columna */
+      height: 70vh;
+      /* Mantiene la proporción original de la imagen */
+      object-fit: cover;
+      /* Cubre el área sin distorsionar */
+    }
+
+  
+    }
+
+    
+
+
+    @media (max-width: 768px) {
+      .carousel_div {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .content{
+      width: 100%;
+    }
+
+    .images{
+      width: 100%;
+    }
   }
 
-  .modal-body {
-    display: flex;
-    align-items: center;
+  .modal_div{
+    width: 100%;
   }
 
-  .modal-content img {
-    width: 100%; /* La imagen ocupará el 100% de su columna */
-    height: 70vh; /* Mantiene la proporción original de la imagen */
-    object-fit: cover; /* Cubre el área sin distorsionar */
-  }
-    </style>
-  </head>
+   
 
-  <body>
-    <nav>
-      <div class="container">
-        <div class="logo">
-          <a href="index.html"> <!-- Enlace que lleva a index.html -->
-            <img src="img/insignia.jpeg" alt="Company Logo" />
-          </a>
-          <div class="logo-text">Insignia Tecnológica</div>
-        </div>
-        <div class="menu-toggle" id="menuToggle">
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-        <ul id="navMenu">
-          <li><a href="arrendamientos.html">Arrendamientos</a></li>
-          <li><a href="venta.html">Ventas</a></li>
-          <li><a href="#">Pagos en Línea</a></li>
-        </ul>
+   
+
+  
+
+  
+
+  
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="container">
+      <div class="logo">
+        <img src="img/insignia.jpeg" alt="Company Logo" />
+        <div class="logo-text">Insignia Tecnológica</div>
       </div>
-    </nav>
-
-    <script>
-      const menuToggle = document.getElementById("menuToggle");
-      const navMenu = document.getElementById("navMenu");
-
-      menuToggle.addEventListener("click", () => {
-        navMenu.classList.toggle("active"); // Alterna la clase active para mostrar/ocultar el menú
-      });
-    </script>
-
-    <section class="properties">
-      <div class="container">
-        <h2>Propiedades en Arriendo</h2>
-        <div class="property-grid">
-          <div class="property-card" data-bs-toggle="modal" data-bs-target="#propertyModal">
-            <img src="img/casa1.jpeg" alt="Modern Apartment" />
-            <div class="property-card-content">
-              <h3>Modern Apartment</h3>
-              <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae, sed.
-              </p>
-              <div class="property-details">
-                <span><i class="fas fa-bed"></i> 3</span>
-                <span><i class="fas fa-bath"></i> 2</span>
-                <span><i class="fas fa-ruler-combined"></i> 80mt</span>
-                <span><i class="fas fa-dollar-sign"></i> 200,000</span>
-              </div>
-            </div>
-          </div>
-          <div class="property-card">
-            <img src="img/casa2.jpeg" alt="Cozy Cottage" />
-            <div class="property-card-content">
-              <h3>Cozy Cottage</h3>
-              <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Beatae, sed.
-              </p>
-              <div class="property-details">
-                <span><i class="fas fa-bed"></i> 3</span>
-                <span><i class="fas fa-bath"></i> 2</span>
-                <span><i class="fas fa-ruler-combined"></i> 80mt</span>
-                <span><i class="fas fa-dollar-sign"></i> 200,000</span>
-              </div>
-            </div>
-          </div>
-          <div class="property-card">
-            <img
-              src="https://i.pinimg.com/564x/4a/30/bc/4a30bc09896d5f958c9607a177df69ca.jpg"
-              alt="Luxury Villa"
-            />
-            <div class="property-card-content">
-              <h3>Luxury Villa</h3>
-              <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Beatae, sed.
-              </p>
-              <div class="property-details">
-                <span><i class="fas fa-bed"></i> 3</span>
-                <span><i class="fas fa-bath"></i> 2</span>
-                <span><i class="fas fa-ruler-combined"></i> 80mt</span>
-                <span><i class="fas fa-dollar-sign"></i> 200,000</span>
-              </div>
-            </div>
-          </div>
-          <div class="property-card">
-            <img
-              src="https://i.pinimg.com/564x/03/38/42/0338426dd53810f83747cc4813d7060f.jpg"
-              alt="Urban Loft"
-            />
-            <div class="property-card-content">
-              <h3>Urban Loft</h3>
-              <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Beatae, sed.
-              </p>
-              <div class="property-details">
-                <span><i class="fas fa-bed"></i> 3</span>
-                <span><i class="fas fa-bath"></i> 2</span>
-                <span><i class="fas fa-ruler-combined"></i> 80mt</span>
-                <span><i class="fas fa-dollar-sign"></i> 200,000</span>
-              </div>
-            </div>
-          </div>
-          <div class="property-card">
-            <img
-              src="https://i.pinimg.com/736x/50/7e/80/507e801330754252bd67960a2a07b1c7.jpg"
-              alt="Family Home"
-            />
-            <div class="property-card-content">
-              <h3>Family Home</h3>
-              <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Beatae, sed.
-              </p>
-              <div class="property-details">
-                <span><i class="fas fa-bed"></i> 3</span>
-                <span><i class="fas fa-bath"></i> 2</span>
-                <span><i class="fas fa-ruler-combined"></i> 80mt</span>
-                <span><i class="fas fa-dollar-sign"></i> 200,000</span>
-              </div>
-            </div>
-          </div>
-          <div class="property-card">
-            <img
-              src="https://i.pinimg.com/564x/e1/5a/36/e15a36b3aeb48de0235badbd70462218.jpg"
-              alt="Mountain Retreat"
-            />
-            <div class="property-card-content">
-              <h3>Mountain Retreat</h3>
-              <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Beatae, sed.
-              </p>
-              <div class="property-details">
-                <span><i class="fas fa-bed"></i> 3</span>
-                <span><i class="fas fa-bath"></i> 2</span>
-                <span><i class="fas fa-ruler-combined"></i> 80mt</span>
-                <span><i class="fas fa-dollar-sign"></i> 200,000</span>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="menu-toggle" id="menuToggle">
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
-    </section>
+      <ul id="navMenu">
+        <li><a href="arrendamientos.html">Arrendamientos</a></li>
+        <li><a href="venta.html">Ventas</a></li>
+        <li><a href="#">Pagos en Línea</a></li>
+      </ul>
+    </div>
+  </nav>
 
-<!-- Modal -->
-<div class="modal fade" id="propertyModal" tabindex="-1" aria-labelledby="propertyModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-custom-width">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="propertyModalLabel">Detalles de la Propiedad</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <!-- Columna del carrusel, ocupa el 60% del ancho -->
-          <div class="col-7">
-            <div id="propertyCarousel" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-inner">
-                <div class="carousel-item active">
-                  <img src="img/casa1.jpeg" alt="Modern Apartment" class="d-block w-100" />
-                </div>
-                <div class="carousel-item">
-                  <img src="img/casa2.jpeg" alt="Modern Apartment Interior" class="d-block w-100" />
-                </div>
-                <div class="carousel-item">
-                  <img src="img/sala-perfecta-1170x780.jpg" alt="Modern Apartment View" class="d-block w-100" />
-                </div>
-              </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#propertyCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-              </button>
-            </div>
-          </div>
-          <!-- Columna de la información, ocupa el 40% del ancho -->
-          <div class="col-5">
+  <script>
+    const menuToggle = document.getElementById("menuToggle");
+    const navMenu = document.getElementById("navMenu");
+
+    menuToggle.addEventListener("click", () => {
+      navMenu.classList.toggle("active"); // Alterna la clase active para mostrar/ocultar el menú
+    });
+  </script>
+
+  <section class="properties">
+    <div class="container">
+      <h2>Propiedades en Arriendo</h2>
+      <div class="property-grid">
+        <div class="property-card" data-bs-toggle="modal" data-bs-target="#propertyModal">
+          <img src="img/casa1.jpeg" alt="Modern Apartment" />
+          <div class="property-card-content">
             <h3>Modern Apartment</h3>
             <p>
-              Disfruta de la comodidad de este moderno apartamento, ubicado en una de las zonas más exclusivas de la ciudad. 
-              Con un diseño elegante y acabados de alta calidad, esta propiedad cuenta con amplias áreas que incluyen tres 
-              dormitorios luminosos y dos baños completamente equipados. El salón principal se conecta con una cocina abierta, 
-              perfecta para recibir invitados o disfrutar de una cena en familia.
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae, sed.
             </p>
-            <p>
-              Además, cuenta con un balcón privado que ofrece impresionantes vistas de la ciudad, proporcionando un espacio ideal 
-              para relajarse y disfrutar del aire libre. Este apartamento también incluye estacionamiento privado y acceso a las 
-              mejores comodidades, como gimnasio y piscina.
-            </p>
-            <div class="property-details row">
-              <div class="col-6 text-start"> <!-- Alineación a la izquierda -->
-                <span><i class="fas fa-bed"></i> 3 dormitorios</span><br />
-                <span><i class="fas fa-bath"></i> 2 baños</span><br />
-              </div>
-              <div class="col-6 text-start"> <!-- Alineación a la izquierda -->
-                <span><i class="fas fa-ruler-combined"></i> 80 mt²</span><br />
-                <span><i class="fas fa-car"></i> Garaje</span>
-              </div>
+            <div class="property-details">
+              <span><i class="fas fa-bed"></i> 3</span>
+              <span><i class="fas fa-bath"></i> 2</span>
+              <span><i class="fas fa-ruler-combined"></i> 80mt</span>
+              <span><i class="fas fa-dollar-sign"></i> 200,000</span>
             </div>
-            <div class="text-start mt-3">
-              <span style="font-size: 1.5rem; font-weight: bold;"><i class="fas fa-dollar-sign"></i> $200,000</span>
+          </div>
+        </div>
+        <div class="property-card">
+          <img src="img/casa2.jpeg" alt="Cozy Cottage" />
+          <div class="property-card-content">
+            <h3>Cozy Cottage</h3>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Beatae, sed.
+            </p>
+            <div class="property-details">
+              <span><i class="fas fa-bed"></i> 3</span>
+              <span><i class="fas fa-bath"></i> 2</span>
+              <span><i class="fas fa-ruler-combined"></i> 80mt</span>
+              <span><i class="fas fa-dollar-sign"></i> 200,000</span>
+            </div>
+          </div>
+        </div>
+        <div class="property-card">
+          <img src="https://i.pinimg.com/564x/4a/30/bc/4a30bc09896d5f958c9607a177df69ca.jpg" alt="Luxury Villa" />
+          <div class="property-card-content">
+            <h3>Luxury Villa</h3>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Beatae, sed.
+            </p>
+            <div class="property-details">
+              <span><i class="fas fa-bed"></i> 3</span>
+              <span><i class="fas fa-bath"></i> 2</span>
+              <span><i class="fas fa-ruler-combined"></i> 80mt</span>
+              <span><i class="fas fa-dollar-sign"></i> 200,000</span>
+            </div>
+          </div>
+        </div>
+        <div class="property-card">
+          <img src="https://i.pinimg.com/564x/03/38/42/0338426dd53810f83747cc4813d7060f.jpg" alt="Urban Loft" />
+          <div class="property-card-content">
+            <h3>Urban Loft</h3>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Beatae, sed.
+            </p>
+            <div class="property-details">
+              <span><i class="fas fa-bed"></i> 3</span>
+              <span><i class="fas fa-bath"></i> 2</span>
+              <span><i class="fas fa-ruler-combined"></i> 80mt</span>
+              <span><i class="fas fa-dollar-sign"></i> 200,000</span>
+            </div>
+          </div>
+        </div>
+        <div class="property-card">
+          <img src="https://i.pinimg.com/736x/50/7e/80/507e801330754252bd67960a2a07b1c7.jpg" alt="Family Home" />
+          <div class="property-card-content">
+            <h3>Family Home</h3>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Beatae, sed.
+            </p>
+            <div class="property-details">
+              <span><i class="fas fa-bed"></i> 3</span>
+              <span><i class="fas fa-bath"></i> 2</span>
+              <span><i class="fas fa-ruler-combined"></i> 80mt</span>
+              <span><i class="fas fa-dollar-sign"></i> 200,000</span>
+            </div>
+          </div>
+        </div>
+        <div class="property-card">
+          <img src="https://i.pinimg.com/564x/e1/5a/36/e15a36b3aeb48de0235badbd70462218.jpg" alt="Mountain Retreat" />
+          <div class="property-card-content">
+            <h3>Mountain Retreat</h3>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+              Beatae, sed.
+            </p>
+            <div class="property-details">
+              <span><i class="fas fa-bed"></i> 3</span>
+              <span><i class="fas fa-bath"></i> 2</span>
+              <span><i class="fas fa-ruler-combined"></i> 80mt</span>
+              <span><i class="fas fa-dollar-sign"></i> 200,000</span>
             </div>
           </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <a href="https://wa.me/1234567890" class="btn btn-success" target="_blank">Contactar al Asesor</a>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal fade modal_div" id="propertyModal" tabindex="-1" aria-labelledby="propertyModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-custom-width">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="propertyModalLabel">Detalles de la Propiedad</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row carousel_div">
+            <!-- Columna del carrusel, ocupa el 60% del ancho -->
+            <div class="col-7 images">
+              <div id="propertyCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="img/casa1.jpeg" alt="Modern Apartment" class="d-block w-100" />
+                  </div>
+                  <div class="carousel-item">
+                    <img src="img/casa2.jpeg" alt="Modern Apartment Interior" class="d-block w-100" />
+                  </div>
+                  <div class="carousel-item">
+                    <img src="img/sala-perfecta-1170x780.jpg" alt="Modern Apartment View" class="d-block w-100" />
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#propertyCarousel"
+                  data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#propertyCarousel"
+                  data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+            </div>
+            <!-- Columna de la información, ocupa el 40% del ancho -->
+            <div class="col-5 content">
+              <h3>Modern Apartment</h3>
+              <p>
+                Disfruta de la comodidad de este moderno apartamento, ubicado en una de las zonas más exclusivas de la
+                ciudad.
+                Con un diseño elegante y acabados de alta calidad, esta propiedad cuenta con amplias áreas que incluyen
+                tres
+                dormitorios luminosos y dos baños completamente equipados. El salón principal se conecta con una cocina
+                abierta,
+                perfecta para recibir invitados o disfrutar de una cena en familia.
+              </p>
+              <p>
+                Además, cuenta con un balcón privado que ofrece impresionantes vistas de la ciudad, proporcionando un
+                espacio ideal
+                para relajarse y disfrutar del aire libre. Este apartamento también incluye estacionamiento privado y
+                acceso a las
+                mejores comodidades, como gimnasio y piscina.
+              </p>
+              <div class="property-details row">
+                <div class="col-6 text-start"> <!-- Alineación a la izquierda -->
+                  <span><i class="fas fa-bed"></i> 3 dormitorios</span><br />
+                  <span><i class="fas fa-bath"></i> 2 baños</span><br />
+                </div>
+                <div class="col-6 text-start"> <!-- Alineación a la izquierda -->
+                  <span><i class="fas fa-ruler-combined"></i> 80 mt²</span><br />
+                  <span><i class="fas fa-car"></i> Garaje</span>
+                </div>
+              </div>
+              <div class="text-start mt-3">
+                <span style="font-size: 1.5rem; font-weight: bold;"><i class="fas fa-dollar-sign"></i> $200,000</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a href="https://wa.me/1234567890" class="btn btn-success" target="_blank">Contactar al Asesor</a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 
 
-    <footer>
-      <div class="container">
-        <div class="footer-content">
-          <div class="footer-section">
-            <h3>Contactenos</h3>
-            <ul>
-              <li><i class="fas fa-envelope"></i> info@example.com</li>
-              <li><i class="fas fa-phone"></i> +1 (234) 567-890</li>
-              <li>
-                <i class="fas fa-map-marker-alt"></i> 123 Main St, City, Country
-              </li>
-            </ul>
-          </div>
-          <div class="footer-section">
-            <h3>Síguenos En</h3>
-            <div class="social-icons">
-              <a href="#" aria-label="Facebook"
-                ><i class="fab fa-facebook-f"></i
-              ></a>
-              <a href="#" aria-label="Twitter"
-                ><i class="fab fa-twitter"></i
-              ></a>
-              <a href="#" aria-label="Instagram"
-                ><i class="fab fa-instagram"></i
-              ></a>
-            </div>
-          </div>
-          <div class="footer-section">
-            <h3>Ubicación</h3>
-            <div style="width: 100%; height: 200px; overflow: hidden">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345097325!2d144.9537353153186!3d-37.81720997975141!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11c2f5%3A0x5045675218ceed0!2s123%20Main%20St%2C%20City%2C%20Country!5e0!3m2!1sen!2sus!4v1639508837278!5m2!1sen!2sus"
-                width="100%"
-                height="300"
-                style="border: 0"
-                allowfullscreen=""
-                loading="lazy"
-              >
-              </iframe>
-            </div>
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Contactenos</h3>
+          <ul>
+            <li><i class="fas fa-envelope"></i> info@example.com</li>
+            <li><i class="fas fa-phone"></i> +1 (234) 567-890</li>
+            <li>
+              <i class="fas fa-map-marker-alt"></i> 123 Main St, City, Country
+            </li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Síguenos En</h3>
+          <div class="social-icons">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
           </div>
         </div>
-        <div class="copyright">
-          <p>
-            &copy; 2024 Insignia Tecnologica. Todos los derechos reservados.
-          </p>
+        <div class="footer-section">
+          <h3>Ubicación</h3>
+          <div style="width: 100%; height: 200px; overflow: hidden">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345097325!2d144.9537353153186!3d-37.81720997975141!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad642af0f11c2f5%3A0x5045675218ceed0!2s123%20Main%20St%2C%20City%2C%20Country!5e0!3m2!1sen!2sus!4v1639508837278!5m2!1sen!2sus"
+              width="100%" height="300" style="border: 0" allowfullscreen="" loading="lazy">
+            </iframe>
+          </div>
         </div>
       </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    
-  </body>
+      <div class="copyright">
+        <p>
+          &copy; 2024 Insignia Tecnologica. Todos los derechos reservados.
+        </p>
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
+
+</body>
+
 </html>
